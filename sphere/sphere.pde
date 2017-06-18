@@ -1,3 +1,5 @@
+//球体に点を配置
+
 float radius = 150;  //半径
 
 void setup() {
