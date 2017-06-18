@@ -1,6 +1,8 @@
 //螺旋上に点を配置
 
 float radius = 150;  //球体の半径
+float dPhiStep = 0;  //dPhi を更新する値
+float dPhiStepVelocity = 0.05;  //dPhiStepを徐々に増やす値
 
 void setup() {
   size(640, 360, P3D);
@@ -17,7 +19,7 @@ void draw() {
   float lastZ = 0;
   
   //z 座標をずらしながら theta を増やしつつ、同時に phi も増やす
-  for (int dTheta = 0, dPhi = 0; dTheta <= 180; dTheta++, dPhi += 10) {
+  for (float dTheta = 0, dPhi = 0; dTheta <= 180; dTheta++, dPhi += dPhiStep) {
     float theta = radians(dTheta);  //x,z軸のなす角度。移動中の円の大きさを司る。
     float phi = radians(dPhi);  //x,y軸のなす角度。円上に点を配置する。
 
@@ -37,5 +39,5 @@ void draw() {
     lastY = y;
     lastZ = z;
   }
-  
+  dPhiStep += dPhiStepVelocity;
 }
