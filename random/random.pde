@@ -1,4 +1,4 @@
-int num = 500;
+int num = 1000;
 Point[] points = new Point[num];
 
 void setup() {
@@ -17,6 +17,7 @@ void draw() {
 
   for (int i = 0; i < num; i++) {
     points[i].display();
+    points[i].update();
   }
 
   for (int i = 0; i < num; i++) {
@@ -31,7 +32,7 @@ void draw() {
         );
       if (d < 40) {
         int c = (int) map(d, 0, 40, 0, 255);
-        stroke(c, c, 255);
+        stroke(c);
         strokeWeight(1);
         line(
         points[i].x, 
