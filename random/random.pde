@@ -1,20 +1,12 @@
-float radius = 250;
-int num = 3000;
-float[] x = new float[num];
-float[] y = new float[num];
-float[] z = new float[num];
+int num = 500;
+Point[] points = new Point[num];
 
 void setup() {
   size(800, 800, P3D);
-//  pixelDensity(displayDensity());
-  
-  for (int i = 0; i < num; i++) {
-    float phi = random(TWO_PI);
-    float unitZ = random(-1, 1);
+  //  pixelDensity(displayDensity());
 
-    x[i] = radius * sqrt(1 - unitZ * unitZ) * cos(phi);
-    y[i] = radius * sqrt(1 - unitZ * unitZ) * sin(phi);
-    z[i] = radius * unitZ;
+  for (int i = 0; i < num; i++) {
+    points[i] = new Point();
   }
 }
 
@@ -24,9 +16,33 @@ void draw() {
   rotateY(frameCount * 0.005);
 
   for (int i = 0; i < num; i++) {
-    stroke(0, 134, 163);
-    strokeWeight(3);
-    point(x[i], y[i], z[i]);
+    points[i].display();
   }
 
+  for (int i = 0; i < num; i++) {
+    for (int j = i + 1; j < num; j++) {
+      float d = dist(
+      points[i].x, 
+      points[i].y, 
+      points[i].z, 
+      points[j].x, 
+      points[j].y, 
+      points[j].z
+        );
+      if (d < 40) {
+        int c = (int) map(d, 0, 40, 0, 255);
+        stroke(c, c, 255);
+        strokeWeight(1);
+        line(
+        points[i].x, 
+        points[i].y, 
+        points[i].z, 
+        points[j].x, 
+        points[j].y, 
+        points[j].z
+          );
+      }
+    }
+  }
 }
+
